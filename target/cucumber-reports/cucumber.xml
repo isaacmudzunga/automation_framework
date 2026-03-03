@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="5.384">
-    <testcase classname="Login Functionality" name="Successful login using first row from CSV" time="5.26">
-        <system-out><![CDATA[Given user is on the login page.............................................passed
-When user logs in with test data from row 0 in CSV file "e2e_test_data.csv".passed
-Then user should see the product page.......................................passed
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="7.619">
+    <testcase classname="Login functionality" name="Successful login with valid credentials" time="7.384">
+        <system-out><![CDATA[Given the user is on the Login page.........................................passed
+When the user enters a valid username and password..........................passed
+And the user clicks the Login button........................................passed
+Then the user should be redirected to the Product page......................passed
+And the Product page should be displayed....................................passed
 ]]></system-out>
     </testcase>
 </testsuite>

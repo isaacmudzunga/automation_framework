@@ -30,12 +30,12 @@ public class BaseTest {
 
     private static final Logger logger = LoggerFactory.getLogger(BaseTest.class);
 
-    protected WebDriver driver;
-    protected WebDriverWait wait;
+    protected static WebDriver driver;
+    protected static WebDriverWait wait;
 
-    protected BasePage basePage;
-    protected LoginPage loginPage;
-    protected ProductPage productPage;
+    protected static BasePage basePage;
+    protected static LoginPage loginPage;
+    protected static ProductPage productPage;
 
     protected void initDriver() throws IOException {
         cleanupOldScreenshots();
@@ -88,7 +88,10 @@ public class BaseTest {
         basePage.setDriver(driver);
 
         loginPage = new LoginPage();
+        loginPage.setDriver(driver);
+        
         productPage = new ProductPage();
+        productPage.setDriver(driver);
     }
 
     protected void quitDriver() {

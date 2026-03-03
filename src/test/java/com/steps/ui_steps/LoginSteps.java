@@ -5,45 +5,52 @@ import java.util.Map;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.After;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-
-import org.openqa.selenium.By;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.bases.BaseTest;
 import com.utils.TestDataUtil;
 
 public class LoginSteps extends BaseTest {
-    
-    private static final Logger logger = LoggerFactory.getLogger(LoginSteps.class);
-    
-    @Before
-    public void setUp() throws IOException {
-        logger.info("=== Starting Login Test Setup ===");
-        initDriver();
+
+    // @Before
+    // public void setUp() throws IOException {
+    //     initDriver();  // opens browser
+    // }
+
+    // @After
+    // public void tearDown() {
+    //     quitDriver();  // closes browser
+    // }
+
+    @Given("the user is on the Login page")
+    public void userIsOnLoginPage() {
+        // simply verify login page is displayed
+        loginPage.getPageHeader();
     }
 
-    @After
-    public void tearDown() {
-        logger.info("=== Ending Login Test Teardown ===");
-        quitDriver();
-    }
-
-    /**
-     * Step: User logs in with test data from CSV file
-     */
-    @When("user logs in with test data from row {int} in CSV file {string}")
-    public void userLogsInWithTestDataFromCSV(int rowIndex, String fileName) {        
-        Map<String, String> testData = TestDataUtil.getCsvRecord(fileName, rowIndex);
+    @When("the user enters a valid username and password")
+    public void userLogsInWithValidCredentials() {
+        // read first row from the default CSV test data file
+        Map<String, String> testData = TestDataUtil.getFirstRecord("e2e_test_data.csv");
         String username = testData.get("Username");
         String password = testData.get("Password");
-        
+
         loginPage.setUsername(username);
         loginPage.setPassword(password);
-        productPage = loginPage.clickLoginPage();
     }
 
+    @And("the user clicks the Login button")
+    public void userClicksLoginButton() {
+        loginPage.clickLoginPage();
+    }
+
+    @Then("the user should be redirected to the Product page")
+    @And("the Product page should be displayed")
+    public void productPageShouldbeDisplayed() {
+        productPage.getProductPageHeader();
+    }
 }
