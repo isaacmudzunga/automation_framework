@@ -11,6 +11,7 @@ public class LoginPage extends BasePage{
         static final By usernameField = By.cssSelector("[data-test='username']");
         static final By passwordField = By.id("password");
         static final By loginButton = By.id("login-button");
+        static final By lockedOutErrorMessage = By.xpath("//h3[normalize-space()='Epic sadface: Sorry, this user has been locked out.']");
     }
 
     public String getPageHeader() {
@@ -38,5 +39,9 @@ public class LoginPage extends BasePage{
         setUsername(username);
         setPassword(password);
         return new ProductPage();
+    }
+
+    public String getLockedOutErrorMessage() {
+        return waitForVisibility(LoginLocators.lockedOutErrorMessage).getText();
     }
 }

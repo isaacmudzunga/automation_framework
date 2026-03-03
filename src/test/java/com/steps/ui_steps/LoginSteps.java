@@ -12,16 +12,17 @@ import com.utils.TestDataUtil;
 
 public class LoginSteps extends BaseTest {
 
-    @Given("the user is on the Login page")
-    public void userIsOnLoginPage() {
-        // simply verify login page is displayed
-        loginPage.getPageHeader();
+    @Given("the user is on the Login page and the header is {string}")
+    public void userIsOnLoginPage(String pageHeader) {
+        // verify login page is displayed String header =
+        String header = loginPage.getPageHeader();
+        assert header != null && header.equalsIgnoreCase(pageHeader) :
+            "Expected login page header '" + pageHeader + "', got: " + header;
     }
 
-    @When("the user enters a valid username and password")
-    public void userLogsInWithValidCredentials() {
-        // read first row from the default CSV test data file
-        Map<String, String> testData = TestDataUtil.getFirstRecord("e2e_test_data.csv");
+    @When("user logs in with test data from row {int} in CSV file {string}")
+    public void userLogsInWithCsvData(int rowIndex, String fileName) {
+        Map<String, String> testData = TestDataUtil.getCsvRecord(fileName, rowIndex);
         String username = testData.get("Username");
         String password = testData.get("Password");
 
@@ -34,9 +35,20 @@ public class LoginSteps extends BaseTest {
         loginPage.clickLoginPage();
     }
 
-    @Then("the user should be redirected to the Product page")
-    @And("the Product page should be displayed")
-    public void productPageShouldbeDisplayed() {
-        productPage.getProductPageHeader();
+    @Then("the user should be redirected to the Product page and the header is {string}")
+    public void productPageShouldbeDisplayed(String pageHeader) {
+        String header = productPage.getProductPageHeader();
+        assert header != null && header.equalsIgnoreCase(pageHeader) :
+        "Expected product page '" + pageHeader + "',got: " +header;
+        // toLowerCase().contains("product") : "Product page not shown, header=" + header;
     }
+
+    @Then("the system must show an error message saying {string}")
+    public void lockedOutError(String lockedOutErrorMessage) {
+        String actual = loginPage.getLockedOutErrorMessage();
+        assert actual != null && actual.equals(lockedOutErrorMessage) :
+            "Expected error '" + lockedOutErrorMessage + "' but got '" + actual + "'";
+    }
+
+
 }

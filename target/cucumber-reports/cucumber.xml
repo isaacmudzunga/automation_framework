@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="7.619">
-    <testcase classname="Login functionality" name="Successful login with valid credentials" time="7.384">
-        <system-out><![CDATA[Given the user is on the Login page.........................................passed
-When the user enters a valid username and password..........................passed
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="2" time="9.636">
+    <testcase classname="Login functionality" name="Successful login with a registered user" time="5.043">
+        <system-out><![CDATA[Given the user is on the Login page and the header is "Swag Labs"...........passed
+When user logs in with test data from row 0 in CSV file "e2e_test_data.csv".passed
 And the user clicks the Login button........................................passed
-Then the user should be redirected to the Product page......................passed
-And the Product page should be displayed....................................passed
+Then the user should be redirected to the Product page and the header is "Swag Labs".passed
+]]></system-out>
+    </testcase>
+    <testcase classname="Login functionality" name="Unsuccessful login with a locked out user" time="4.453">
+        <system-out><![CDATA[Given the user is on the Login page and the header is "Swag Labs"...........passed
+When user logs in with test data from row 1 in CSV file "e2e_test_data.csv".passed
+And the user clicks the Login button........................................passed
+Then the system must show an error message saying "Epic sadface: Sorry, this user has been locked out.".passed
 ]]></system-out>
     </testcase>
 </testsuite>
