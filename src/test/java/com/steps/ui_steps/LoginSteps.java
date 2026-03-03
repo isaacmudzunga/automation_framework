@@ -1,10 +1,6 @@
 package com.steps.ui_steps;
 
-import java.io.IOException;
 import java.util.Map;
-
-import io.cucumber.java.Before;
-import io.cucumber.java.After;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -15,16 +11,6 @@ import com.bases.BaseTest;
 import com.utils.TestDataUtil;
 
 public class LoginSteps extends BaseTest {
-
-    // @Before
-    // public void setUp() throws IOException {
-    //     initDriver();  // opens browser
-    // }
-
-    // @After
-    // public void tearDown() {
-    //     quitDriver();  // closes browser
-    // }
 
     @Given("the user is on the Login page")
     public void userIsOnLoginPage() {
