@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="2" time="9.636">
-    <testcase classname="Login functionality" name="Successful login with a registered user" time="5.043">
-        <system-out><![CDATA[Given the user is on the Login page and the header is "Swag Labs"...........passed
-When user logs in with test data from row 0 in CSV file "e2e_test_data.csv".passed
-And the user clicks the Login button........................................passed
-Then the user should be redirected to the Product page and the header is "Swag Labs".passed
+<testsuite errors="0" failures="1" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="3" time="19.787">
+    <testcase classname="Standard user shopping journey" name="Standard user logs in successfully" time="7.132">
+        <system-out><![CDATA[Given the user is logged in as a standard user..............................passed
+Then the user should be on the page titled "Products".......................passed
 ]]></system-out>
     </testcase>
-    <testcase classname="Login functionality" name="Unsuccessful login with a locked out user" time="4.453">
-        <system-out><![CDATA[Given the user is on the Login page and the header is "Swag Labs"...........passed
-When user logs in with test data from row 1 in CSV file "e2e_test_data.csv".passed
-And the user clicks the Login button........................................passed
-Then the system must show an error message saying "Epic sadface: Sorry, this user has been locked out.".passed
+    <testcase classname="Standard user shopping journey" name="Standard user adds a product to the cart from the products page" time="6.203">
+        <system-out><![CDATA[Given the user is logged in as a standard user..............................passed
+When the user adds the product "Sauce Labs Backpack" to the cart............passed
+And the product "Sauce Labs Backpack" should have the action button "Remove".passed
+And the product "Sauce Labs Backpack" should have the price "$29.99"........passed
 ]]></system-out>
+    </testcase>
+    <testcase classname="Standard user shopping journey" name="Standard user adds a product to the cart from the product details page" time="6.058">
+        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given the user is logged in as a standard user..............................passed
+When the user opens the product details page for "Sauce Labs Fleece Jacket".passed
+Then the product details should show........................................undefined
+]]></failure>
     </testcase>
 </testsuite>

@@ -1,54 +1,32 @@
 package com.steps.ui_steps;
 
+import com.bases.BaseTest;
+import io.cucumber.java.en.*;
 import java.util.Map;
 
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Then;
-
-import com.bases.BaseTest;
 import com.utils.TestDataUtil;
 
-public class LoginSteps extends BaseTest {
+public class LoginSteps extends BaseTest{
 
-    @Given("the user is on the Login page and the header is {string}")
-    public void userIsOnLoginPage(String pageHeader) {
-        // verify login page is displayed String header =
-        String header = loginPage.getPageHeader();
-        assert header != null && header.equalsIgnoreCase(pageHeader) :
-            "Expected login page header '" + pageHeader + "', got: " + header;
-    }
-
-    @When("user logs in with test data from row {int} in CSV file {string}")
-    public void userLogsInWithCsvData(int rowIndex, String fileName) {
-        Map<String, String> testData = TestDataUtil.getCsvRecord(fileName, rowIndex);
+    @Given("the user is logged in as a standard user")
+    public void userLogsWithStandardUser() {
+        Map<String, String> testData = TestDataUtil.getCsvRecord("e2e_test_data.csv", 0);
         String username = testData.get("Username");
         String password = testData.get("Password");
 
-        loginPage.setUsername(username);
-        loginPage.setPassword(password);
-    }
+        if (username == null || password == null) {
+            throw new RuntimeException("Username or Password missing in CSV file.");
+        }
 
-    @And("the user clicks the Login button")
-    public void userClicksLoginButton() {
+        loginPage.logIntoApplication(username, password);
         loginPage.clickLoginPage();
     }
 
-    @Then("the user should be redirected to the Product page and the header is {string}")
+    @Then("the user should be on the page titled {string}")
     public void productPageShouldbeDisplayed(String pageHeader) {
         String header = productPage.getProductPageHeader();
         assert header != null && header.equalsIgnoreCase(pageHeader) :
         "Expected product page '" + pageHeader + "',got: " +header;
-        // toLowerCase().contains("product") : "Product page not shown, header=" + header;
     }
-
-    @Then("the system must show an error message saying {string}")
-    public void lockedOutError(String lockedOutErrorMessage) {
-        String actual = loginPage.getLockedOutErrorMessage();
-        assert actual != null && actual.equals(lockedOutErrorMessage) :
-            "Expected error '" + lockedOutErrorMessage + "' but got '" + actual + "'";
-    }
-
 
 }

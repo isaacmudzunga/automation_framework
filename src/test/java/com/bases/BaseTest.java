@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -19,6 +21,7 @@ import com.utils.ScreenshotCleanupUtil;
 import com.config.EnvironmentConfig;
 import com.ui.BasePage;
 import com.ui.pages.LoginPage;
+import com.ui.pages.ProductDetailsPage;
 import com.ui.pages.ProductPage;
 
 
@@ -36,6 +39,7 @@ public class BaseTest {
     protected static BasePage basePage;
     protected static LoginPage loginPage;
     protected static ProductPage productPage;
+    protected static ProductDetailsPage productDetailsPage;
 
     protected void initDriver() throws IOException {
         cleanupOldScreenshots();
@@ -63,23 +67,28 @@ public class BaseTest {
 
     private WebDriver initChromeDriver() throws IOException {
         ChromeOptions options = new ChromeOptions();
-        
-        String ciEnv = System.getenv("CI");
-        boolean isHeadless = EnvironmentConfig.isHeadless() || "true".equalsIgnoreCase(ciEnv);
-        
-        if (isHeadless) {
-            Path tempUserDataDir = Files.createTempDirectory("chrome-user-data");
-            options.addArguments("--user-data-dir=" + tempUserDataDir);
-            options.addArguments("--headless=new");
-            options.addArguments("--disable-gpu");
-            options.addArguments("--no-sandbox");
-            options.addArguments("--disable-dev-shm-usage");
-        }
-        
-        options.addArguments("--remote-allow-origins=*");
-        options.addArguments("--disable-blink-features=AutomationControlled");
-        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-        
+
+        Path tempProfile = Files.createTempDirectory("chrome-profile-");
+        options.addArguments("--user-data-dir=" + tempProfile.toAbsolutePath());
+
+        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-infobars");
+        options.addArguments("--disable-popup-blocking");
+        options.addArguments("--disable-save-password-bubble");
+        options.addArguments("--disable-features=PasswordLeakDetection,PasswordManagerOnboarding,AutofillServerCommunication");
+        options.addArguments("--no-default-browser-check");
+        options.addArguments("--disable-default-apps");
+        // options.addArguments("--incognito");
+
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("credentials_enable_service", false);
+        prefs.put("profile.password_manager_enabled", false);
+        prefs.put("profile.password_manager_leak_detection", false);
+        prefs.put("autofill.profile_enabled", false);
+        prefs.put("autofill.credit_card_enabled", false);
+
+        options.setExperimentalOption("prefs", prefs);
+
         return new ChromeDriver(options);
     }
 
@@ -92,6 +101,9 @@ public class BaseTest {
         
         productPage = new ProductPage();
         productPage.setDriver(driver);
+
+        productDetailsPage = new ProductDetailsPage();
+        productDetailsPage.setDriver(driver);
     }
 
     protected void quitDriver() {

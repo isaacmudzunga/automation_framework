@@ -1,4 +1,4 @@
-package com.steps.ui_steps;
+package com.steps.ui_steps.hook;
 
 import java.io.IOException;
 

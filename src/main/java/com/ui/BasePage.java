@@ -1,6 +1,7 @@
 package com.ui;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
@@ -31,6 +32,11 @@ public class BasePage {
 
     protected WebElement waitForPresence(By locator) {
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
+    public boolean isElementDisplayed(By locator) {
+        List<WebElement> elements = driver.findElements(locator);
+        return !elements.isEmpty() && elements.get(0).isDisplayed();
     }
 
     protected WebElement find(By locator) {
