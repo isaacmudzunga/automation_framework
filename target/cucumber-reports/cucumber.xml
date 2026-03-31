@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="1" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="24.353">
-    <testcase classname="Execute UI steps from CSV sequence" name="Login using CSV-driven element sequence" time="24.207">
-        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given I execute the sequence from "webelementsequencesteps/login_sequence_steps_template.csv" using element list "webdriverelements/loginPage_element_list_template.csv" and test data "testdata/test_data_template.csv".undefined
-]]></failure>
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="25.894">
+    <testcase classname="Execute UI steps from CSV sequence" name="Login using CSV-driven element sequence" time="25.758">
+        <system-out><![CDATA[Given I execute the sequence from "webelementsequencesteps/login_sequence_steps_template.csv" using element list "webdriverelements/loginPage_element_list_template.csv" and test data "testdata/test_data_template.csv".passed
+Then the user should be on the page titled "Swag Labs"......................passed
+]]></system-out>
     </testcase>
 </testsuite>
