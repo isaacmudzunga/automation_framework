@@ -1,0 +1,5 @@
+ElementName,LocatorType,LocatorValue,Description
+usernameField,cssSelector,[data-test='username'],Login username input field
+passwordField,id,password,Login password input field
+loginButton,id,login-button,Login submit button
+pageHeader,css,.title,Product page header text

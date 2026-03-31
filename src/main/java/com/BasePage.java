@@ -1,4 +1,4 @@
-package com.ui;
+package com;
 
 import java.time.Duration;
 import java.util.List;

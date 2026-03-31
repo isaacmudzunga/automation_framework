@@ -19,10 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.utils.ScreenshotCleanupUtil;
 import com.config.EnvironmentConfig;
-import com.ui.BasePage;
-import com.ui.pages.LoginPage;
-import com.ui.pages.ProductDetailsPage;
-import com.ui.pages.ProductPage;
+import com.BasePage;
 
 
 import org.slf4j.Logger;
@@ -37,9 +34,6 @@ public class BaseTest {
     protected static WebDriverWait wait;
 
     protected static BasePage basePage;
-    protected static LoginPage loginPage;
-    protected static ProductPage productPage;
-    protected static ProductDetailsPage productDetailsPage;
 
     protected void initDriver() throws IOException {
         cleanupOldScreenshots();
@@ -95,15 +89,6 @@ public class BaseTest {
     private void initializePageObjects() {
         basePage = new BasePage();
         basePage.setDriver(driver);
-
-        loginPage = new LoginPage();
-        loginPage.setDriver(driver);
-        
-        productPage = new ProductPage();
-        productPage.setDriver(driver);
-
-        productDetailsPage = new ProductDetailsPage();
-        productDetailsPage.setDriver(driver);
     }
 
     protected void quitDriver() {

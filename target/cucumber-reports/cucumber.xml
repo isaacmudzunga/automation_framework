@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="1" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="3" time="19.787">
-    <testcase classname="Standard user shopping journey" name="Standard user logs in successfully" time="7.132">
-        <system-out><![CDATA[Given the user is logged in as a standard user..............................passed
-Then the user should be on the page titled "Products".......................passed
-]]></system-out>
-    </testcase>
-    <testcase classname="Standard user shopping journey" name="Standard user adds a product to the cart from the products page" time="6.203">
-        <system-out><![CDATA[Given the user is logged in as a standard user..............................passed
-When the user adds the product "Sauce Labs Backpack" to the cart............passed
-And the product "Sauce Labs Backpack" should have the action button "Remove".passed
-And the product "Sauce Labs Backpack" should have the price "$29.99"........passed
-]]></system-out>
-    </testcase>
-    <testcase classname="Standard user shopping journey" name="Standard user adds a product to the cart from the product details page" time="6.058">
-        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given the user is logged in as a standard user..............................passed
-When the user opens the product details page for "Sauce Labs Fleece Jacket".passed
-Then the product details should show........................................undefined
+<testsuite errors="0" failures="1" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="24.353">
+    <testcase classname="Execute UI steps from CSV sequence" name="Login using CSV-driven element sequence" time="24.207">
+        <failure message="The scenario has pending or undefined step(s)" type="java.lang.Exception"><![CDATA[Given I execute the sequence from "webelementsequencesteps/login_sequence_steps_template.csv" using element list "webdriverelements/loginPage_element_list_template.csv" and test data "testdata/test_data_template.csv".undefined
 ]]></failure>
     </testcase>
 </testsuite>
