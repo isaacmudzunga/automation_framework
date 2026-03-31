@@ -1,0 +1,7 @@
+Action,ElementName,Value,DataKey,Expected,WaitSeconds
+navigate,,https://www.saucedemo.com,,,
+input,usernameField,${Username},Username,,
+input,passwordField,${Password},Password,,
+click,loginButton,,,
+waitforvisibility,pageHeader,,,
+verifytext,pageHeader,Products,,
